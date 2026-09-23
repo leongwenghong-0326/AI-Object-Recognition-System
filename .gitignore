@@ -1,0 +1,38 @@
+# -- Secrets & local config (never commit) --
+config/config.php
+config/settings.local.php
+config/*.local.php
+.env
+.env.*
+*.env
+!.env.example
+
+# API keys / credentials dumps
+**/credentials.json
+**/secrets.json
+*.pem
+
+# -- Runtime data --
+logs/*
+!logs/.gitkeep
+!logs/.htaccess
+storage/temp/*
+!storage/temp/.gitkeep
+storage/*.sqlite
+storage/*.sqlite-*
+storage/uploads/
+storage/cache/
+
+# -- OS / IDE --
+.DS_Store
+Thumbs.db
+Desktop.ini
+.idea/
+.vscode/
+*.swp
+*~
+*.bak
+*.tmp
+
+# -- Optional private screenshot drafts --
+docs/screenshots/_private/

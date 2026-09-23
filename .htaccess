@@ -1,0 +1,16 @@
+# AI + AR Smart Object Recognition System
+Options -Indexes
+
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+</IfModule>
+
+# Protect sensitive paths
+<IfModule mod_authz_core.c>
+    <FilesMatch "^(config\.php|settings\.local\.php)$">
+        Require all denied
+    </FilesMatch>
+</IfModule>
+
+# Block direct access to logs and storage internals
+RedirectMatch 403 (?i)^.*/(logs|storage)/.*\.(log|php|json)$
