@@ -1,9 +1,8 @@
 -- AI + AR Smart Object Recognition System
--- Optional MySQL scan history schema (MySQL 8+)
+-- Local MySQL scan history schema (XAMPP / MySQL 8+)
 --
--- NOTE: By default the app uses SQLite at storage/scan_history.sqlite
--- (set db_driver = 'sqlite' and db_enabled = true). Import this file
--- only when you prefer MySQL (db_driver = 'mysql').
+-- Import in phpMyAdmin or MySQL CLI for local use.
+-- Then set in config: db_driver = mysql, db_name = ai_ar_scanner
 CREATE DATABASE IF NOT EXISTS ai_ar_scanner
   CHARACTER SET utf8mb4
   COLLATE utf8mb4_unicode_ci;
