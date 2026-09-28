@@ -36,15 +36,15 @@ Camera tip: `http://localhost` usually works on desktop. Phones on a LAN IP over
 
 | Scanner | Scan result |
 |:---:|:---:|
-| ![Scanner](docs/screenshots/01-scanner.png) | ![Scan result](docs/screenshots/02-scan-result.png) |
+| ![Scanner](docs/screenshots/01-scanner.png?v=2) | ![Scan result](docs/screenshots/02-scan-result.png?v=2) |
 
 | Card details | Settings |
 |:---:|:---:|
-| ![Card details](docs/screenshots/03-card-details.png) | ![Settings](docs/screenshots/04-settings.png) |
+| ![Card details](docs/screenshots/03-card-details.png?v=2) | ![Settings](docs/screenshots/04-settings.png?v=2) |
 
 | History | Mobile |
 |:---:|:---:|
-| ![History](docs/screenshots/05-history.png) | ![Mobile](docs/screenshots/06-mobile.png) |
+| ![History](docs/screenshots/05-history.png?v=2) | ![Mobile](docs/screenshots/06-mobile.png?v=2) |
 
 ## Folder structure
 
