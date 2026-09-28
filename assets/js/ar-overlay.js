@@ -219,6 +219,31 @@
       if (provEl) provEl.textContent = this.formatProvider(result.provider);
     },
 
+    applyLocalized(fields, original) {
+      const source = original || this.lastResult || {};
+      this.setPrimary("cardProductName", "cardProductNameAlt", fields.productName, source.productName || source.objectLabel || "");
+      this.setPrimary("cardManufacturer", "cardManufacturerAlt", fields.manufacturer, source.manufacturer || "");
+      this.setPrimary("cardSpecification", "cardSpecificationAlt", fields.specification, source.specification || "");
+      this.setPrimary("cardDescription", "cardDescriptionAlt", fields.description, source.description || "");
+    },
+
+    setPrimary(primaryId, altId, mainText, originalText) {
+      const primary = document.getElementById(primaryId);
+      const alt = document.getElementById(altId);
+      const main = (mainText || "").trim() || "—";
+      const original = (originalText || "").trim();
+      if (primary) primary.textContent = main;
+      if (alt) {
+        if (original && original !== main) {
+          alt.textContent = original;
+          alt.hidden = false;
+        } else {
+          alt.textContent = "";
+          alt.hidden = true;
+        }
+      }
+    },
+
     /**
      * Primary line follows UI language; alt line shows the other language when different.
      */

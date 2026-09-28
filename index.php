@@ -52,6 +52,18 @@ if ($base === '/' || $base === '.') {
       <video id="cameraVideo" class="camera-video" playsinline muted autoplay data-i18n-aria="live_camera" aria-label="Live camera preview"></video>
       <canvas id="captureCanvas" class="capture-canvas" aria-hidden="true"></canvas>
 
+      <div id="focusReticle" class="focus-reticle" hidden aria-hidden="true"></div>
+      <div id="featureNotice" class="feature-notice" role="status" hidden></div>
+
+      <div class="cam-tools" id="camTools">
+        <button type="button" class="cam-tool" id="torchBtn" hidden data-i18n-aria="flashlight" aria-pressed="false" aria-label="Flashlight">
+          <i class="fa-solid fa-bolt" aria-hidden="true"></i>
+        </button>
+        <button type="button" class="cam-tool" id="switchCamBtn" data-i18n-aria="switch_cam" aria-label="Switch Camera">
+          <i class="fa-solid fa-camera-rotate" aria-hidden="true"></i>
+        </button>
+      </div>
+
       <div id="viewfinder" class="viewfinder" aria-hidden="true">
         <span class="vf-corner tl"></span>
         <span class="vf-corner tr"></span>
@@ -123,6 +135,11 @@ if ($base === '/' || $base === '.') {
 
     <footer class="scanner-footer">
       <p id="statusMessage" class="status-message" role="status" aria-live="polite" data-i18n="point_camera">Point camera at an object</p>
+      <div class="voice-tools" id="voiceTools">
+        <button type="button" class="voice-btn" id="speakBtn" data-i18n-aria="speak" aria-label="Speak"><i class="fa-solid fa-volume-high" aria-hidden="true"></i> <span data-i18n="speak">Speak</span></button>
+        <button type="button" class="voice-btn" id="replayBtn" data-i18n-aria="replay" aria-label="Replay"><i class="fa-solid fa-rotate-right" aria-hidden="true"></i> <span data-i18n="replay">Replay</span></button>
+        <button type="button" class="voice-btn" id="stopVoiceBtn" data-i18n-aria="stop_voice" aria-label="Stop"><i class="fa-solid fa-stop" aria-hidden="true"></i> <span data-i18n="stop_voice">Stop</span></button>
+      </div>
       <button type="button" id="scanBtn" class="scan-btn" data-i18n-aria="scan" aria-label="Scan">
         <span class="scan-btn-ring" aria-hidden="true"></span>
         <span class="scan-btn-label" id="scanBtnLabel" data-i18n="scan">SCAN</span>
@@ -130,9 +147,12 @@ if ($base === '/' || $base === '.') {
     </footer>
   </div>
 
-  <script src="<?= e($base) ?>/assets/js/i18n.js"></script>
-  <script src="<?= e($base) ?>/assets/js/camera.js"></script>
-  <script src="<?= e($base) ?>/assets/js/ar-overlay.js"></script>
-  <script src="<?= e($base) ?>/assets/js/scanner.js"></script>
+  <script src="<?= e($base) ?>/assets/js/i18n.js?v=20260928b"></script>
+  <script src="<?= e($base) ?>/assets/js/client-prefs.js?v=20260928b"></script>
+  <script src="<?= e($base) ?>/assets/js/haptic.js?v=20260928b"></script>
+  <script src="<?= e($base) ?>/assets/js/voice.js?v=20260928b"></script>
+  <script src="<?= e($base) ?>/assets/js/camera.js?v=20260928b"></script>
+  <script src="<?= e($base) ?>/assets/js/ar-overlay.js?v=20260928b"></script>
+  <script src="<?= e($base) ?>/assets/js/scanner.js?v=20260928b"></script>
 </body>
 </html>

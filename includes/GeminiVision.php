@@ -55,7 +55,7 @@ final class GeminiVision implements AIProvider
         }
 
         $key = $this->config->getString('gemini_api_key');
-        $model = $this->config->getString('gemini_model', 'gemini-2.5-flash');
+        $model = $this->config->getString('gemini_model', 'gemini-3.8-flash');
         $url = sprintf(
             'https://generativelanguage.googleapis.com/v1beta/models/%s?key=%s',
             rawurlencode($model),

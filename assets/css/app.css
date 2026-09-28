@@ -1144,3 +1144,138 @@ body.scanner-body {
   gap: 8px;
   align-items: center;
 }
+
+.cam-tools {
+  position: absolute;
+  right: 12px;
+  bottom: 12px;
+  z-index: 5;
+  display: flex;
+  gap: 8px;
+}
+
+.cam-tool,
+.voice-btn {
+  border: 1px solid var(--line);
+  background: rgba(8, 12, 20, 0.72);
+  color: var(--text);
+  backdrop-filter: blur(8px);
+}
+
+.cam-tool {
+  width: 48px;
+  height: 48px;
+  border-radius: 16px;
+  font-size: 1.05rem;
+}
+
+.cam-tool.active {
+  color: #5eead4;
+  border-color: rgba(94, 234, 212, 0.8);
+}
+
+.cam-tool:disabled {
+  opacity: 0.4;
+}
+
+.voice-tools {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 8px;
+}
+
+.voice-btn {
+  min-height: 40px;
+  padding: 0 14px;
+  border-radius: 999px;
+  font-size: 0.86rem;
+  font-weight: 600;
+}
+
+.voice-btn:focus-visible,
+.cam-tool:focus-visible {
+  outline: 2px solid #5eead4;
+  outline-offset: 2px;
+}
+
+.focus-reticle {
+  position: absolute;
+  z-index: 3;
+  width: 72px;
+  height: 72px;
+  margin-left: -36px;
+  margin-top: -36px;
+  border: 2px solid #5eead4;
+  border-radius: 10px;
+  pointer-events: none;
+  box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.35), inset 0 0 0 1px rgba(94, 234, 212, 0.25);
+}
+
+.focus-reticle::before {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 8px;
+  height: 8px;
+  margin: -4px 0 0 -4px;
+  border-radius: 50%;
+  background: #5eead4;
+}
+
+.focus-reticle.pop {
+  animation: focusPop 1.25s ease forwards;
+}
+
+@keyframes focusPop {
+  0% { transform: scale(1.28); opacity: 1; }
+  35% { transform: scale(1); opacity: 1; }
+  100% { transform: scale(0.94); opacity: 0; }
+}
+
+.feature-notice {
+  position: absolute;
+  z-index: 6;
+  left: 12px;
+  right: 72px;
+  top: 12px;
+  padding: 10px 12px;
+  border-radius: 12px;
+  background: rgba(8, 12, 20, 0.9);
+  color: #fff;
+  text-align: center;
+  font-size: 0.86rem;
+}
+
+#clientPrefs .form-check-label {
+  color: inherit;
+}
+
+#clientPrefs .form-check-input {
+  width: 2.6rem;
+  height: 1.35rem;
+  cursor: pointer;
+}
+
+#clientPrefs .form-check-input:checked {
+  background-color: #2fdd9a;
+  border-color: #2fdd9a;
+}
+
+#clientPrefs .form-label {
+  color: inherit;
+  background: transparent;
+}
+
+#clientPrefs .form-select {
+  color: #111;
+  background-color: #fff;
+}
+
+select option,
+#clientPrefs .form-select option,
+.settings-form .form-select option {
+  color: #111;
+  background-color: #fff;
+}

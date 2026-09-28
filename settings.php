@@ -73,7 +73,7 @@ $qrUrl = 'https://api.qrserver.com/v1/create-qr-code/?size=220x220&data=' . rawu
 
       <div class="mb-3">
         <label class="form-label" for="geminiModel" data-i18n="gemini_model">Gemini Model</label>
-        <input type="text" class="form-control" id="geminiModel" name="gemini_model" value="<?= e($settings['gemini_model']) ?>" placeholder="gemini-2.5-flash">
+        <input type="text" class="form-control" id="geminiModel" name="gemini_model" value="<?= e($settings['gemini_model']) ?>" placeholder="gemini-3.8-flash">
       </div>
 
       <div class="mb-3">
@@ -94,7 +94,7 @@ $qrUrl = 'https://api.qrserver.com/v1/create-qr-code/?size=220x220&data=' . rawu
 
       <div class="mb-3">
         <label class="form-label" for="agnesModel" data-i18n="agnes_model">Agnes Model</label>
-        <input type="text" class="form-control" id="agnesModel" name="agnes_model" value="<?= e($settings['agnes_model']) ?>" placeholder="agnes-2.5-flash">
+        <input type="text" class="form-control" id="agnesModel" name="agnes_model" value="<?= e($settings['agnes_model']) ?>" placeholder="agnes-3.0-flash">
       </div>
 
       <div class="mb-3">
@@ -137,10 +137,72 @@ $qrUrl = 'https://api.qrserver.com/v1/create-qr-code/?size=220x220&data=' . rawu
       </div>
     </form>
 
+    <section class="glass-card" id="clientPrefs">
+      <p class="muted small mb-3" data-i18n="camera_settings_help">These camera options apply on the scanner page. Flashlight and focus only work on phones that support them.</p>
+      <div class="mb-3">
+        <label class="form-label" for="cameraResolution" data-i18n="cam_res">Camera Resolution</label>
+        <select class="form-select" id="cameraResolution">
+          <option value="auto" data-i18n="res_auto">Auto</option>
+          <option value="standard" data-i18n="res_standard">Standard</option>
+          <option value="720" data-i18n="res_720">HD 720p</option>
+          <option value="1080" data-i18n="res_1080">Full HD 1080p</option>
+          <option value="high" data-i18n="res_high">High Resolution</option>
+        </select>
+      </div>
+      <div class="form-check form-switch mb-2">
+        <input class="form-check-input" type="checkbox" id="prefAutofocus">
+        <label class="form-check-label" for="prefAutofocus" data-i18n="autofocus">Autofocus</label>
+      </div>
+      <div class="form-check form-switch mb-2">
+        <input class="form-check-input" type="checkbox" id="prefTapFocus">
+        <label class="form-check-label" for="prefTapFocus" data-i18n="tap_focus">Tap to Focus</label>
+      </div>
+      <div class="form-check form-switch mb-2">
+        <input class="form-check-input" type="checkbox" id="prefHaptic">
+        <label class="form-check-label" for="prefHaptic" data-i18n="haptic">Haptic Feedback</label>
+      </div>
+      <div class="form-check form-switch mb-3">
+        <input class="form-check-input" type="checkbox" id="prefTorch">
+        <label class="form-check-label" for="prefTorch" data-i18n="flashlight">Flashlight</label>
+      </div>
+
+      <h2 data-i18n="voice_settings">Voice Settings</h2>
+      <div class="form-check form-switch mb-2">
+        <input class="form-check-input" type="checkbox" id="prefVoice">
+        <label class="form-check-label" for="prefVoice" data-i18n="voice_narration">Voice Narration</label>
+      </div>
+      <div class="form-check form-switch mb-3">
+        <input class="form-check-input" type="checkbox" id="prefAutoSpeak">
+        <label class="form-check-label" for="prefAutoSpeak" data-i18n="auto_speak">Auto Speak</label>
+      </div>
+      <div class="mb-3">
+        <label class="form-label" for="prefVoiceSelect" data-i18n="voice">Voice</label>
+        <select class="form-select" id="prefVoiceSelect">
+          <option value="" data-i18n="voice_default">Default voice</option>
+        </select>
+      </div>
+      <div class="mb-3">
+        <label class="form-label" for="prefVolume"><span data-i18n="volume">Volume</span> <span id="prefVolumeLabel">100%</span></label>
+        <input type="range" class="form-range" id="prefVolume" min="0" max="100" value="100">
+      </div>
+      <div class="d-grid gap-2">
+        <button type="button" class="btn btn-outline-light" id="testVoiceBtn">
+          <i class="fa-solid fa-volume-high" aria-hidden="true"></i> <span data-i18n="test_voice">Test Voice</span>
+        </button>
+        <button type="button" class="btn btn-outline-light" id="stopVoiceBtn">
+          <i class="fa-solid fa-stop" aria-hidden="true"></i> <span data-i18n="stop_voice">Stop</span>
+        </button>
+        <button type="button" class="btn btn-outline-danger" id="resetClientPrefs" data-i18n="reset_client">Reset camera and voice</button>
+      </div>
+      <div id="clientPrefsNotice" class="form-text text-warning mt-2" hidden></div>
+    </section>
+
     <p class="footer-note" data-i18n="footer_note">API keys never appear in frontend JavaScript responses. Saved keys are stored only on the server.</p>
   </div>
 
-  <script src="<?= e($base) ?>/assets/js/i18n.js"></script>
-  <script src="<?= e($base) ?>/assets/js/settings.js"></script>
+  <script src="<?= e($base) ?>/assets/js/i18n.js?v=20260928b"></script>
+  <script src="<?= e($base) ?>/assets/js/client-prefs.js?v=20260928b"></script>
+  <script src="<?= e($base) ?>/assets/js/voice.js?v=20260928b"></script>
+  <script src="<?= e($base) ?>/assets/js/settings.js?v=20260928b"></script>
 </body>
 </html>

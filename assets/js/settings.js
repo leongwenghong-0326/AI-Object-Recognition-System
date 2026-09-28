@@ -162,5 +162,136 @@
       const saved = aStatus.querySelector(".ok");
       aStatus.innerHTML = keyStatusHtml(saved ? "saved" : "missing");
     }
+    fillVoices();
   });
+
+  const client = document.getElementById("clientPrefs");
+  const resolution = document.getElementById("cameraResolution");
+  const volume = document.getElementById("prefVolume");
+  const volumeLabel = document.getElementById("prefVolumeLabel");
+  const voiceSelect = document.getElementById("prefVoiceSelect");
+  const notice = document.getElementById("clientPrefsNotice");
+
+  function checkbox(id) {
+    return document.getElementById(id);
+  }
+
+  function paintClientPrefs() {
+    if (!client || !window.ARPrefs) return;
+    const prefs = ARPrefs.load();
+    if (resolution) resolution.value = prefs.cameraResolution;
+    const map = {
+      prefAutofocus: prefs.autofocus,
+      prefTapFocus: prefs.tapToFocus,
+      prefHaptic: prefs.haptic,
+      prefTorch: prefs.torch,
+      prefVoice: prefs.voiceEnabled,
+      prefAutoSpeak: prefs.autoSpeak,
+    };
+    Object.keys(map).forEach((id) => {
+      const el = checkbox(id);
+      if (el) el.checked = !!map[id];
+    });
+    if (volume) volume.value = String(prefs.volume);
+    if (volumeLabel) volumeLabel.textContent = prefs.volume + "%";
+    if (voiceSelect) voiceSelect.value = prefs.voiceURI || "";
+  }
+
+  function readClientPrefs() {
+    return {
+      cameraResolution: resolution ? resolution.value : "auto",
+      autofocus: !!(checkbox("prefAutofocus") && checkbox("prefAutofocus").checked),
+      tapToFocus: !!(checkbox("prefTapFocus") && checkbox("prefTapFocus").checked),
+      haptic: !!(checkbox("prefHaptic") && checkbox("prefHaptic").checked),
+      torch: !!(checkbox("prefTorch") && checkbox("prefTorch").checked),
+      voiceEnabled: !!(checkbox("prefVoice") && checkbox("prefVoice").checked),
+      autoSpeak: !!(checkbox("prefAutoSpeak") && checkbox("prefAutoSpeak").checked),
+      voiceURI: voiceSelect ? voiceSelect.value : "",
+      voiceLang: voiceSelect && voiceSelect.selectedOptions[0] ? (voiceSelect.selectedOptions[0].dataset.lang || "") : "",
+      voiceName: voiceSelect && voiceSelect.selectedOptions[0] ? (voiceSelect.selectedOptions[0].dataset.name || "") : "",
+      volume: volume ? Number(volume.value) : 100,
+    };
+  }
+
+  function fillVoices() {
+    if (!voiceSelect || !window.ARVoice) return;
+    const current = voiceSelect.value;
+    const selected = window.ARPrefs ? ARPrefs.load().voiceURI : current;
+    ARVoice.whenVoicesReady((voices) => {
+      const keep = voiceSelect.querySelector('option[value=""]');
+      voiceSelect.innerHTML = "";
+      if (keep) voiceSelect.appendChild(keep);
+      else {
+        const opt = document.createElement("option");
+        opt.value = "";
+        opt.textContent = t("voice_default");
+        voiceSelect.appendChild(opt);
+      }
+      voices.forEach((voice) => {
+        const opt = document.createElement("option");
+        opt.value = voice.voiceURI;
+        opt.dataset.lang = voice.lang || "";
+        opt.dataset.name = voice.name || "";
+        opt.textContent = (voice.name || "Voice") + (voice.lang ? " (" + voice.lang + ")" : "");
+        voiceSelect.appendChild(opt);
+      });
+      voiceSelect.value = selected && Array.from(voiceSelect.options).some((o) => o.value === selected) ? selected : "";
+      const chosen = voiceSelect.selectedOptions[0];
+      if (chosen && chosen.dataset.lang && window.ARPrefs) {
+        const saved = ARPrefs.load();
+        if (saved.voiceURI === voiceSelect.value && (saved.voiceLang !== chosen.dataset.lang || saved.voiceName !== (chosen.dataset.name || ""))) {
+          ARPrefs.save({ voiceLang: chosen.dataset.lang, voiceName: chosen.dataset.name || "" });
+        }
+      }
+      if (!window.ARVoice.supported() && notice) {
+        notice.hidden = false;
+        notice.textContent = t("voice_unsupported");
+      }
+    });
+  }
+
+  if (client && window.ARPrefs) {
+    paintClientPrefs();
+    fillVoices();
+    client.addEventListener("change", () => {
+      if (volume && volumeLabel) volumeLabel.textContent = volume.value + "%";
+      ARPrefs.save(readClientPrefs());
+    });
+    client.addEventListener("input", (e) => {
+      if (e.target === volume && volumeLabel) volumeLabel.textContent = volume.value + "%";
+      if (e.target === volume) ARPrefs.save({ volume: Number(volume.value) });
+    });
+    const resetBtn = document.getElementById("resetClientPrefs");
+    if (resetBtn) {
+      resetBtn.addEventListener("click", () => {
+        ARPrefs.reset();
+        paintClientPrefs();
+      });
+    }
+    const testVoiceBtn = document.getElementById("testVoiceBtn");
+    if (testVoiceBtn) {
+      testVoiceBtn.addEventListener("click", () => {
+        if (!window.ARVoice || !ARVoice.supported()) {
+          if (notice) {
+            notice.hidden = false;
+            notice.textContent = t("voice_unsupported");
+          }
+          return;
+        }
+        ARPrefs.save(readClientPrefs());
+        const result = ARVoice.test();
+        if (notice) {
+          notice.hidden = !!(result && result.ok === false);
+          notice.textContent = result && result.reason === "unsupported" ? t("voice_unsupported") : "";
+        }
+      });
+    }
+    document.addEventListener("arvoice:error", () => {
+      if (!notice) return;
+      notice.hidden = false;
+      notice.textContent = t("voice_failed");
+    });
+    const stopBtn = document.getElementById("stopVoiceBtn");
+    if (stopBtn) stopBtn.addEventListener("click", () => { if (window.ARVoice) ARVoice.cancel(); });
+  }
 })();

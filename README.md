@@ -18,14 +18,17 @@ Camera tip: `http://localhost` usually works on desktop. Phones on a LAN IP over
 ## Features
 
 - Live rear-camera preview (`getUserMedia`) + tap-to-focus when supported
+- Camera tools: resolution, flashlight, switch camera, autofocus, haptic feedback
 - Large **SCAN / SCAN AGAIN** control with stage-based progress (capture → AI → lookup → display)
 - JPEG capture (max 1280px, quality ~0.70) via Canvas
 - AI modes: **Auto** (Gemini → Agnes), **Gemini only**, **Agnes only**, with model fallbacks
 - Anti-hallucination vision prompt (generic names when the model is unsure)
 - Optional conservative web product enrichment
 - AR overlay: bounding box + draggable, expandable, bilingual info card
+- After a successful scan, the card text follows the selected voice language, and **Speak** reads product, manufacturer, specification, and description
 - Site-wide **English / 中文** language switch
-- Settings: key status (never full key), Show/Hide, Test Connection, phone QR code
+- Voice controls on the scanner: Speak, Replay, Stop, plus Auto Speak, volume, and voice picker in Settings
+- Settings: key status (never full key), Show/Hide, Test Connection, phone QR code, camera and voice options
 - Optional scan history (SQLite default or MySQL) — search, details, pagination, clear
 - Secure config — API keys never appear in frontend JavaScript responses
 
@@ -52,6 +55,7 @@ ai_object_recognition_system/
 ├── history.php            Scan history
 ├── api/
 │   ├── recognize.php      POST image → AI result
+│   ├── translate.php      Translate a scan into the selected voice language
 │   ├── settings.php       Save settings / test connection
 │   └── history.php        List / detail / clear
 ├── assets/css & js        UI, camera, AR overlay, i18n
@@ -104,14 +108,14 @@ The app is subdirectory-safe — it does not assume install at domain root.
 **Gemini**
 
 1. Create a key in [Google AI Studio](https://aistudio.google.com/)
-2. Default model: `gemini-2.5-flash`
-3. Fallbacks (one per line in Settings), e.g. `gemini-3.6-flash`, `gemini-3.5-flash`, `gemini-2.5-flash-lite`
+2. Default model: `gemini-3.8-flash`
+3. Fallbacks (one per line in Settings), e.g. `gemini-3.7-flash`, `gemini-3.6-flash`, `gemini-3.5-flash`
 
 **Agnes**
 
 1. Key from the [Agnes platform](https://platform.agnes-ai.com/)
 2. Base URL: `https://apihub.agnes-ai.com/v1`
-3. Default model: `agnes-2.5-flash`
+3. Default model: `agnes-3.0-flash`
 
 Keys live in `config/config.php` and/or `config/settings.local.php` (both gitignored). The UI only shows **Key saved** / **Not configured**.
 
@@ -143,7 +147,9 @@ Images from scans are **not** stored — only structured result metadata.
 
 ## 5. Language (EN / 中文)
 
-Every main page has an **EN / 中文** control. Choice is stored in `localStorage` (`ai_ar_lang`) and applies to labels, status text, alerts, history UI, and AR card primary/alt lines.
+Every main page has an **EN / 中文** control. Choice is stored in `localStorage` (`ai_ar_lang`) and applies to labels, status text, alerts, history UI, and the default AR card.
+
+The scan card can also follow the **voice** chosen in Settings. English and Chinese come from the recognition result. Other languages are translated after a successful scan, then spoken in full when Auto Speak is on.
 
 ## 6. HTTPS & camera
 

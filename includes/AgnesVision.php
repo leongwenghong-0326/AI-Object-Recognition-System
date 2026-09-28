@@ -84,7 +84,7 @@ final class AgnesVision implements AIProvider
     private function probeChat(): array
     {
         $base = rtrim($this->config->getString('agnes_base_url', 'https://apihub.agnes-ai.com/v1'), '/');
-        $model = $this->config->getString('agnes_model', 'agnes-2.5-flash');
+        $model = $this->config->getString('agnes_model', 'agnes-3.0-flash');
         $payload = [
             'model' => $model,
             'messages' => [

@@ -9,13 +9,14 @@ declare(strict_types=1);
 return array (
   'ai_provider' => 'auto',
   'gemini_api_key' => '',
-  'gemini_model' => 'gemini-2.5-flash',
-  'gemini_fallback_models' => 'gemini-3.6-flash
-gemini-3.5-flash
-gemini-2.5-flash-lite',
+  'gemini_model' => 'gemini-3.8-flash',
+  'gemini_fallback_models' => 'gemini-3.7-flash
+gemini-3.6-flash
+gemini-3.5-flash',
   'agnes_api_key' => '',
-  'agnes_model' => 'agnes-2.5-flash',
-  'agnes_fallback_models' => 'agnes-2.0-flash',
+  'agnes_model' => 'agnes-3.0-flash',
+  'agnes_fallback_models' => 'agnes-2.5-flash
+agnes-2.0-flash',
   'agnes_base_url' => 'https://apihub.agnes-ai.com/v1',
   'request_timeout' => 45,
   'db_host' => '127.0.0.1',

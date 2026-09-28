@@ -1,22 +1,14 @@
 # Screenshots
 
-Add PNG files here so the main [README](../../README.md) gallery works.
+Gallery images used by the main [README](../../README.md).
 
-| File | Capture this |
+| File | What it shows |
 |------|----------------|
-| `01-scanner.png` | Scanner home — camera preview, SCAN button, EN/中文 switch |
-| `02-scan-result.png` | After a successful scan — AR box + info card |
-| `03-card-details.png` | Expanded AR card (manufacturer, specs, description) |
-| `04-settings.png` | Settings — AI provider, models, key status, QR |
+| `01-scanner.png` | Scanner home — viewfinder, flashlight, switch camera, Speak / Replay / Stop, SCAN |
+| `02-scan-result.png` | Successful scan — detection box and bilingual result card |
+| `03-card-details.png` | Expanded card in the selected voice language, with the original English underneath |
+| `04-settings.png` | Settings — AI models, key status, camera options, voice options |
 | `05-history.png` | Scan History list |
-| `06-mobile.png` | Phone browser view (optional but recommended) |
+| `06-mobile.png` | Phone-width scanner after a successful scan |
 
-Tips:
-
-1. Use `http://localhost/ai_object_recognition_system/` or HTTPS.
-2. Prefer a real object in frame for result shots.
-3. Before capturing Settings, confirm keys show **Key saved** / **Not configured** only — never the full API key.
-4. Crop to the app UI; avoid desktop taskbars with personal windows.
-5. Keep files under ~1–2 MB each.
-
-Private drafts can go in `_private/` (gitignored).
+The result shots use the live scanner UI with a sample recognition so the gallery matches the current card, camera tools, and voice controls.
