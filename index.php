@@ -22,7 +22,7 @@ if ($base === '/' || $base === '.') {
   <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" rel="stylesheet">
-  <link href="<?= e($base) ?>/assets/css/app.css" rel="stylesheet">
+  <link href="<?= e($base) ?>/assets/css/app.css?v=20260928c" rel="stylesheet">
 </head>
 <body class="scanner-body">
   <div id="app" class="scanner-shell" data-base="<?= e($base) ?>">
@@ -54,15 +54,6 @@ if ($base === '/' || $base === '.') {
 
       <div id="focusReticle" class="focus-reticle" hidden aria-hidden="true"></div>
       <div id="featureNotice" class="feature-notice" role="status" hidden></div>
-
-      <div class="cam-tools" id="camTools">
-        <button type="button" class="cam-tool" id="torchBtn" hidden data-i18n-aria="flashlight" aria-pressed="false" aria-label="Flashlight">
-          <i class="fa-solid fa-bolt" aria-hidden="true"></i>
-        </button>
-        <button type="button" class="cam-tool" id="switchCamBtn" data-i18n-aria="switch_cam" aria-label="Switch Camera">
-          <i class="fa-solid fa-camera-rotate" aria-hidden="true"></i>
-        </button>
-      </div>
 
       <div id="viewfinder" class="viewfinder" aria-hidden="true">
         <span class="vf-corner tl"></span>
@@ -135,6 +126,14 @@ if ($base === '/' || $base === '.') {
 
     <footer class="scanner-footer">
       <p id="statusMessage" class="status-message" role="status" aria-live="polite" data-i18n="point_camera">Point camera at an object</p>
+      <div class="cam-tools" id="camTools">
+        <button type="button" class="cam-tool" id="torchBtn" data-i18n-aria="flashlight" aria-pressed="false" aria-label="Flashlight">
+          <i class="fa-solid fa-bolt" aria-hidden="true"></i>
+        </button>
+        <button type="button" class="cam-tool" id="switchCamBtn" data-i18n-aria="switch_cam" aria-label="Switch Camera">
+          <i class="fa-solid fa-camera-rotate" aria-hidden="true"></i>
+        </button>
+      </div>
       <div class="voice-tools" id="voiceTools">
         <button type="button" class="voice-btn" id="speakBtn" data-i18n-aria="speak" aria-label="Speak"><i class="fa-solid fa-volume-high" aria-hidden="true"></i> <span data-i18n="speak">Speak</span></button>
         <button type="button" class="voice-btn" id="replayBtn" data-i18n-aria="replay" aria-label="Replay"><i class="fa-solid fa-rotate-right" aria-hidden="true"></i> <span data-i18n="replay">Replay</span></button>
@@ -147,12 +146,12 @@ if ($base === '/' || $base === '.') {
     </footer>
   </div>
 
-  <script src="<?= e($base) ?>/assets/js/i18n.js?v=20260928b"></script>
-  <script src="<?= e($base) ?>/assets/js/client-prefs.js?v=20260928b"></script>
-  <script src="<?= e($base) ?>/assets/js/haptic.js?v=20260928b"></script>
-  <script src="<?= e($base) ?>/assets/js/voice.js?v=20260928b"></script>
-  <script src="<?= e($base) ?>/assets/js/camera.js?v=20260928b"></script>
-  <script src="<?= e($base) ?>/assets/js/ar-overlay.js?v=20260928b"></script>
-  <script src="<?= e($base) ?>/assets/js/scanner.js?v=20260928b"></script>
+  <script src="<?= e($base) ?>/assets/js/i18n.js?v=20260928c"></script>
+  <script src="<?= e($base) ?>/assets/js/client-prefs.js?v=20260928c"></script>
+  <script src="<?= e($base) ?>/assets/js/haptic.js?v=20260928c"></script>
+  <script src="<?= e($base) ?>/assets/js/voice.js?v=20260928c"></script>
+  <script src="<?= e($base) ?>/assets/js/camera.js?v=20260928c"></script>
+  <script src="<?= e($base) ?>/assets/js/ar-overlay.js?v=20260928c"></script>
+  <script src="<?= e($base) ?>/assets/js/scanner.js?v=20260928c"></script>
 </body>
 </html>

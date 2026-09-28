@@ -384,7 +384,8 @@
     const switchBtn = document.getElementById("switchCamBtn");
     const info = detail || {};
     if (torchBtn) {
-      torchBtn.hidden = !info.torch;
+      torchBtn.hidden = false;
+      torchBtn.classList.toggle("unsupported", !info.torch);
       torchBtn.setAttribute("aria-pressed", window.ARCamera && ARCamera.torchOn ? "true" : "false");
       torchBtn.classList.toggle("active", !!(window.ARCamera && ARCamera.torchOn));
     }
